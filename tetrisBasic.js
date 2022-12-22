@@ -7,6 +7,8 @@ let startY = 0; // Starting Y position for Tetromino
 let score = 0; // Tracks the score
 let level = 1; // Tracks current level
 let winOrLose = "Playing";
+let leftArrow = "A"
+
 // Used as a look up table where each value in the array
 // contains the x & y position we can use to draw the
 // box on the canvas
@@ -123,7 +125,7 @@ function SetupCanvas(){
 
     // Draw controls text
     ctx.font = '19px Arial';
-    ctx.fillText("A : Move Left", 310, 388);
+    ctx.fillText(`${leftArrow} : Move Left`, 310, 388);
     ctx.fillText("D : Move Right", 310, 413);
     ctx.fillText("S : Move Down", 310, 438);
     ctx.fillText("E : Rotate Right", 310, 463);
@@ -181,7 +183,7 @@ function DrawTetromino(){
 function HandleKeyPress(key){
     if(winOrLose != "Game Over"){
     // a keycode (LEFT)
-    if(key.keyCode === 65){
+    if(key.keyCode === 37){
         // 4. Check if I'll hit the wall
         direction = DIRECTION.LEFT;
         if(!HittingTheWall() && !CheckForHorizontalCollision()){
@@ -191,7 +193,7 @@ function HandleKeyPress(key){
         } 
 
     // d keycode (RIGHT)
-    } else if(key.keyCode === 68){
+    } else if(key.keyCode === 39){
         
         // 4. Check if I'll hit the wall
         direction = DIRECTION.RIGHT;
@@ -202,10 +204,10 @@ function HandleKeyPress(key){
         }
 
     // s keycode (DOWN)
-    } else if(key.keyCode === 83){
+    } else if(key.keyCode === 40){
         MoveTetrominoDown();
         // 9. e keycode calls for rotation of Tetromino
-    } else if(key.keyCode === 69){
+    } else if(key.keyCode === 38){
         RotateTetromino();
     }
     } 
@@ -561,3 +563,4 @@ function GetLastSquareX()
     }
     return lastX;
 }
+console.log("testing")
