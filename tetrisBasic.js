@@ -8,7 +8,6 @@ let score = 0; // Tracks the score
 let level = 1; // Tracks current level
 let winOrLose = "Playing";
 let command = "Use Arrow Keys";
-let speed = 1000; //Speed equals 1 second
 
 
 // Used as a look up table where each value in the array
@@ -254,14 +253,12 @@ function MoveTetrominoDown() {
 // 10. Automatically calls for a Tetromino to fall every second
 
 
-window.setInterval(function () {
+window.setInterval(() => {
   if (winOrLose != "Game Over") {
     MoveTetrominoDown();
-  }
-  
-}, speed);
-
     
+  } 
+}, 1000);
 
 
 
@@ -482,6 +479,7 @@ function CheckForCompletedRows() {
   // 8. Track how many rows to delete and where to start deleting
   let rowsToDelete = 0;
   let startOfDeletion = 0;
+ 
 
 
   // Check every row to see if it has been completed
@@ -519,16 +517,18 @@ function CheckForCompletedRows() {
         ctx.fillStyle = "white";
         ctx.fillRect(coorX, coorY, 21, 21);
       }
+    
     }
   }
   if (rowsToDelete > 0) {
     score += 10;
-    level += 1;
     ctx.fillStyle = "white";
     ctx.fillRect(310, 109, 140, 19);
     ctx.fillStyle = "black";
     ctx.fillText(score.toString(), 310, 127);
     MoveAllRowsDown(rowsToDelete, startOfDeletion);
+    score.score = score;
+    console.log("tester", score)
   }
 }
 
@@ -613,4 +613,4 @@ function GetLastSquareX() {
   }
   return lastX;
 }
-console.log("testing");
+console.log("testing", score, level);
