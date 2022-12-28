@@ -252,11 +252,13 @@ function MoveTetrominoDown() {
 
 // 10. Automatically calls for a Tetromino to fall every second
 
-
+function speed(something) {
+  something = something * 10
+  console.log(something, "Tester234")
+}
 window.setInterval(() => {
-  if (winOrLose != "Game Over") {
+  if (winOrLose != "Game Over" ) {
     MoveTetrominoDown();
-    
   } 
 }, 1000);
 
@@ -422,7 +424,7 @@ function CheckForVerticalCollison() {
       }
 
       // 7. Check for completed rows
-      CheckForCompletedRows();
+      CheckForCompletedRows(speed);
 
       CreateTetromino();
 
@@ -475,7 +477,7 @@ function CheckForHorizontalCollision() {
 
 // 7. Check for completed rows
 // ***** SLIDE *****
-function CheckForCompletedRows() {
+function CheckForCompletedRows(myCallback) {
   // 8. Track how many rows to delete and where to start deleting
   let rowsToDelete = 0;
   let startOfDeletion = 0;
@@ -522,13 +524,13 @@ function CheckForCompletedRows() {
   }
   if (rowsToDelete > 0) {
     score += 10;
+    let speed = score;
     ctx.fillStyle = "white";
     ctx.fillRect(310, 109, 140, 19);
     ctx.fillStyle = "black";
     ctx.fillText(score.toString(), 310, 127);
     MoveAllRowsDown(rowsToDelete, startOfDeletion);
-    score.score = score;
-    console.log("tester", score)
+    myCallback(speed)
   }
 }
 
