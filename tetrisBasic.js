@@ -9,7 +9,6 @@ let level = 1; // Tracks current level
 let winOrLose = "Playing";
 let command = "Use Arrow Keys";
 
-
 // Used as a look up table where each value in the array
 // contains the x & y position we can use to draw the
 // box on the canvas
@@ -124,7 +123,7 @@ function SetupCanvas() {
   ctx.strokeRect(300, 171, 161, 24);
 
   // Draw level
- 
+
   ctx.fillText(level.toString(), 310, 190);
 
   // Draw next label text
@@ -253,15 +252,28 @@ function MoveTetrominoDown() {
 // 10. Automatically calls for a Tetromino to fall every second
 
 function speed(something) {
-  something = 1000 - something
-  console.log(something, "Tester234")
+  if (something === NaN || something === undefined) {
+    x = 1000;
+  } else {
+    x = 1000 - something;
+  }
+  console.log(x, "Tester234");
 }
+
 window.setInterval(() => {
-  if (winOrLose != "Game Over" ) {
+  if (winOrLose != "Game Over") {
     MoveTetrominoDown();
-  } 
+  }
 }, 1000);
 
+// console.log(y, "Test345");
+
+// console.log(speed().something)
+
+// let x = speed((something) => {
+//   something = 1000 - something
+//   console.log(something, "Tester234")
+// })
 
 
 // Clears the previously drawn Tetromino
@@ -474,15 +486,12 @@ function CheckForHorizontalCollision() {
   return collision;
 }
 
-
 // 7. Check for completed rows
 // ***** SLIDE *****
 function CheckForCompletedRows(myCallback) {
   // 8. Track how many rows to delete and where to start deleting
   let rowsToDelete = 0;
   let startOfDeletion = 0;
- 
-
 
   // Check every row to see if it has been completed
   for (let y = 0; y < gBArrayHeight; y++) {
@@ -519,7 +528,6 @@ function CheckForCompletedRows(myCallback) {
         ctx.fillStyle = "white";
         ctx.fillRect(coorX, coorY, 21, 21);
       }
-    
     }
   }
   if (rowsToDelete > 0) {
@@ -530,7 +538,7 @@ function CheckForCompletedRows(myCallback) {
     ctx.fillStyle = "black";
     ctx.fillText(score.toString(), 310, 127);
     MoveAllRowsDown(rowsToDelete, startOfDeletion);
-    myCallback(speed)
+    myCallback(speed);
   }
 }
 
