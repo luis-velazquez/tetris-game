@@ -253,7 +253,7 @@ function MoveTetrominoDown() {
 // 10. Automatically calls for a Tetromino to fall every second
 
 function speed(something) {
-  something = something * 10
+  something = 1000 - something
   console.log(something, "Tester234")
 }
 window.setInterval(() => {
